@@ -1,4 +1,10 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Profile(BaseModel):
+    name: str
+    email: str
+    age: int
 
 app = FastAPI()
 
@@ -21,3 +27,7 @@ def products(id:int = 1, price:int=None):
 @app.get('/profile/{userid}/comments')
 def profile(userid:int,commentid:int):
     return {f'Profile page for user with id {userid} and commentid {commentid}'}
+
+@app.post('/adduser')
+def adduser(profile:Profile):
+    return profile
