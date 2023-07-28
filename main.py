@@ -22,6 +22,27 @@ class Product(BaseModel):
     tags: Set[str] = []
     image: List[Image]
 
+    class Config:
+        schema_extra={
+            "example": {
+                "name":"Phone",
+                "price":100,
+                "discount":10,
+                "discounted_price":0,
+                "tags":["Electronics", "Computers"],
+                "image":[
+                    {
+                        "url":"http://www.foo.com",
+                        "name":"phone image"
+                    },
+                    {
+                        "url":"http://www.foo.com",
+                        "name":"phone image side view"
+                    }
+                ]
+            }
+        }
+
 class Offer(BaseModel):
     name: str
     description: str
