@@ -13,13 +13,13 @@ class Image(BaseModel):
     name: str
 
 class Product(BaseModel):
-    name: str
+    name: str = Field(example="phone")
     price: int = Field(
         title="Price of the item",
         description="This would be the price of the item.")
     discount: int
     discounted_price: float
-    tags: Set[str] = []
+    tags: Set[str] = Field(example="[electronics, phones]")
     image: List[Image]
 
     class Config:
