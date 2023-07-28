@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.openapi.utils import get_openapi
 from pydantic import BaseModel, Field, HttpUrl
 from typing import Set, List
@@ -66,6 +66,10 @@ class User(BaseModel):
     email: str
 
 app = FastAPI()
+
+@app.post('/login')
+def login(username: str = Form(...), password: str = Form(...)):
+    return {"username": username}
 
 @app.post('/addevent')
 def addevent(event: Event):
