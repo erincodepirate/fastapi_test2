@@ -6,7 +6,18 @@ class Profile(BaseModel):
     email: str
     age: int
 
+class Product(BaseModel):
+    name: str
+    price: int
+    discount: int
+    discounted_price: float
+
 app = FastAPI()
+
+@app.post('/addproduct')
+def addproduct(product:Product):
+    product.discounted_price = product.price - (product.price * product.discount)/100
+    return product
 
 # admin takes precedence over username
 @app.get('/user/admin')
