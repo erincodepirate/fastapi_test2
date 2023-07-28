@@ -14,10 +14,10 @@ class Product(BaseModel):
 
 app = FastAPI()
 
-@app.post('/addproduct')
-def addproduct(product:Product):
+@app.post('/addproduct/{product_id}')
+def addproduct(product:Product, product_id:int, category:str):
     product.discounted_price = product.price - (product.price * product.discount)/100
-    return product
+    return {"product_id": product_id, "product": product, "category": category}
 
 # admin takes precedence over username
 @app.get('/user/admin')
